@@ -107,7 +107,7 @@ export default function Home() {
           <ul style={{ padding: 0, margin: 0 }}>
             {secondaryMenuItems.map((item, i) => (
               <MenuItem
-                key={item.route + i}
+                key={`${item.route}-${i}`}
                 label={item.label}
                 index={primaryMenuItems.length + i}
                 isPrimary={false}

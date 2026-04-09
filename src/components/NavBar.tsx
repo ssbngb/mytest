@@ -17,8 +17,6 @@ export default function NavBar() {
   const pathname = usePathname();
   const isHome = pathname === '/';
 
-  const statusColors = USER_STATUS_COLORS;
-
   const cycleStatus = () => {
     const order = [UserStatus.Online, UserStatus.Away, UserStatus.Busy, UserStatus.Offline];
     const idx = order.indexOf(status);
@@ -141,7 +139,7 @@ export default function NavBar() {
               style={{
                 width: '7px',
                 height: '100%',
-                background: statusColors[status],
+                background: USER_STATUS_COLORS[status],
                 flexShrink: 0,
                 transition: 'background 0.3s ease',
               }}
