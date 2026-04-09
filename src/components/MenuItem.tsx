@@ -8,7 +8,6 @@ interface MenuItemProps {
   isPrimary?: boolean;
   isActive?: boolean;
   onClick?: () => void;
-  subLabel?: string;
 }
 
 const menuItemVariants = {
@@ -33,7 +32,6 @@ export default function MenuItem({
   isPrimary = true,
   isActive = false,
   onClick,
-  subLabel,
 }: MenuItemProps) {
   return (
     <motion.li
@@ -42,62 +40,46 @@ export default function MenuItem({
       initial="hidden"
       animate="visible"
       whileHover={{
-        x: 16,
-        scale: 1.05,
+        x: isPrimary ? 50 : 20,
+        scale: 1.08,
         transition: { type: 'spring', stiffness: 400, damping: 20 },
       }}
       whileTap={{
         scale: 0.97,
-        x: 8,
+        x: isPrimary ? 30 : 10,
         transition: { type: 'spring', stiffness: 600, damping: 25 },
       }}
       onClick={onClick}
-      className="list-none cursor-pointer select-none"
+      className="list-none cursor-pointer"
       style={{ originX: 0 }}
     >
-      <div
-        className="relative flex items-center gap-3 py-1"
-        style={{
-          borderLeft: isActive ? '3px solid var(--ow-primary)' : '3px solid transparent',
-          paddingLeft: '12px',
-          transition: 'border-color 0.2s ease',
-        }}
+      <span
+        style={
+          isPrimary
+            ? {
+                display: 'block',
+                fontSize: 'min(8vh, 72px)',
+                lineHeight: 1.2,
+                fontStyle: 'italic',
+                fontWeight: 'bold',
+                color: 'white',
+                textShadow: '0 0 2px black',
+                fontFamily: "'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif",
+              }
+            : {
+                display: 'block',
+                fontSize: 'min(3.1vh, 29px)',
+                lineHeight: 1.5,
+                fontStyle: 'normal',
+                fontWeight: isActive ? 'bold' : 'normal',
+                color: isActive ? 'var(--ow-primary)' : 'white',
+                textShadow: '0 0 2px black',
+                fontFamily: "'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif",
+              }
+        }
       >
-        {/* Hover background */}
-        <motion.div
-          className="absolute inset-y-0 -left-2 -right-4 -z-10 rounded-sm"
-          style={{ background: 'rgba(65, 166, 246, 0.1)' }}
-          initial={{ opacity: 0, scaleX: 0.8 }}
-          whileHover={{ opacity: 1, scaleX: 1 }}
-          transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-        />
-
-        <div>
-          <span
-            className={`block leading-tight font-bold ${
-              isPrimary
-                ? 'text-4xl md:text-5xl text-[color:var(--ow-text)]'
-                : 'ow-title text-xl md:text-2xl font-semibold text-[color:var(--ow-text-muted)]'
-            } ${isActive ? 'text-[color:var(--ow-primary)]' : ''}`}
-            style={{
-              fontFamily: isPrimary
-                ? "'Rajdhani', 'Teko', Impact, 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif"
-                : undefined,
-              fontWeight: isPrimary ? 800 : undefined,
-              fontStyle: 'normal',
-              letterSpacing: isPrimary ? '0.02em' : undefined,
-              textShadow: isActive ? '0 0 20px rgba(249, 158, 26, 0.5)' : undefined,
-            }}
-          >
-            {label}
-          </span>
-          {subLabel && (
-            <span className="text-xs text-[color:var(--ow-text-muted)] tracking-widest uppercase">
-              {subLabel}
-            </span>
-          )}
-        </div>
-      </div>
+        {label}
+      </span>
     </motion.li>
   );
 }
