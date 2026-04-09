@@ -74,12 +74,18 @@ export default function MenuItem({
 
         <div>
           <span
-            className={`ow-title block leading-tight ${
+            className={`block leading-tight font-bold ${
               isPrimary
-                ? 'text-4xl md:text-5xl font-bold italic text-[color:var(--ow-text)]'
-                : 'text-xl md:text-2xl font-semibold text-[color:var(--ow-text-muted)]'
+                ? 'text-4xl md:text-5xl text-[color:var(--ow-text)]'
+                : 'ow-title text-xl md:text-2xl font-semibold text-[color:var(--ow-text-muted)]'
             } ${isActive ? 'text-[color:var(--ow-primary)]' : ''}`}
             style={{
+              fontFamily: isPrimary
+                ? "'Rajdhani', 'Teko', Impact, 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif"
+                : undefined,
+              fontWeight: isPrimary ? 800 : undefined,
+              fontStyle: 'normal',
+              letterSpacing: isPrimary ? '0.02em' : undefined,
               textShadow: isActive ? '0 0 20px rgba(249, 158, 26, 0.5)' : undefined,
             }}
           >

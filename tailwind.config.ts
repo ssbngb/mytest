@@ -21,8 +21,8 @@ const config: Config = {
         'ow-danger': '#ff4655',
       },
       fontFamily: {
-        'ow-title': ['Rajdhani', 'Teko', 'Impact', 'sans-serif'],
-        'ow-body': ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
+        'ow-title': ['Rajdhani', 'Teko', 'Impact', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', 'sans-serif'],
+        'ow-body': ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', 'sans-serif'],
       },
       backgroundImage: {
         'ow-gradient': 'linear-gradient(135deg, #1a1e2e 0%, #0d1117 100%)',

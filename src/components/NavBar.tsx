@@ -23,10 +23,11 @@ export default function NavBar() {
       className="fixed top-0 left-0 right-0 z-50"
       style={{
         height: 'var(--navbar-height)',
-        background: 'linear-gradient(180deg, rgba(13, 17, 23, 0.95) 0%, rgba(13, 17, 23, 0.7) 100%)',
-        borderBottom: '1px solid var(--ow-border)',
+        background: 'linear-gradient(180deg, rgba(10, 13, 20, 0.98) 0%, rgba(13, 17, 23, 0.85) 100%)',
+        borderBottom: '1px solid rgba(65, 166, 246, 0.4)',
         backdropFilter: 'blur(16px)',
         WebkitBackdropFilter: 'blur(16px)',
+        boxShadow: '0 2px 20px rgba(0,0,0,0.5)',
       }}
     >
       <div className="h-full flex items-center justify-between px-6 md:px-8 max-w-7xl mx-auto">

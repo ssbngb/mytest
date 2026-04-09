@@ -39,13 +39,7 @@ export default function Home() {
           >
             <h1
               className="ow-title font-black text-5xl md:text-7xl lg:text-8xl leading-none"
-              style={{
-                background: 'linear-gradient(180deg, #ffffff 0%, rgba(255,255,255,0.15) 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-                filter: 'drop-shadow(0 0 30px rgba(255,255,255,0.1))',
-              }}
+              style={{ color: '#ffffff', textShadow: '0 0 60px rgba(65, 166, 246, 0.4), 0 0 20px rgba(255,255,255,0.1)' }}
             >
               OW
             </h1>
