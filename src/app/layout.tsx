@@ -16,7 +16,7 @@ export default function RootLayout({
     <html lang="zh-CN">
       <body>
         <NavBar />
-        <main style={{ paddingTop: 'var(--navbar-height)' }}>
+        <main>
           {children}
         </main>
       </body>

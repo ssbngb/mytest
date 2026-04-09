@@ -23,7 +23,10 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
   return (
     <>
       <Scene level={SceneLevel.Fill} />
-      <div className="relative min-h-[calc(100vh-var(--navbar-height))] px-6 md:px-8 lg:px-12 py-12 max-w-3xl mx-auto">
+      <div
+        className="relative min-h-screen overflow-y-auto px-6 md:px-8 lg:px-12 py-8 max-w-3xl mx-auto"
+        style={{ paddingTop: 'calc(var(--navbar-height) + 2rem)' }}
+      >
         {/* Back button */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}

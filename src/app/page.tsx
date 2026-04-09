@@ -8,70 +8,94 @@ import MenuItem from '@/components/MenuItem';
 import { SceneLevel } from '@/lib/constants';
 
 const primaryMenuItems = [
-  { label: '博客', subLabel: 'BLOG', route: '/blog' },
-  { label: '关于', subLabel: 'ABOUT', route: '/about' },
+  { label: '博客', route: '/blog' },
+  { label: '关于', route: '/about' },
 ];
 
 const secondaryMenuItems = [
   { label: '项目', route: '/about#projects' },
+  { label: 'GitHub', route: 'https://github.com' },
+  { label: '更新说明', route: '#' },
+];
+
+const WALLPAPERS = [
+  'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1920&q=80',
+  'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1920&q=80',
+  'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1920&q=80',
 ];
 
 export default function Home() {
   const [sceneLevel, setSceneLevel] = useState<SceneLevel>(SceneLevel.Zero);
+  const [wallpaperIndex, setWallpaperIndex] = useState(0);
   const router = useRouter();
 
   const handleNavigate = (route: string) => {
+    if (route.startsWith('http')) {
+      window.open(route, '_blank');
+      return;
+    }
+    if (route === '#') return;
     setSceneLevel(SceneLevel.One);
     setTimeout(() => router.push(route), 300);
   };
 
+  const switchWallpaper = () => {
+    setWallpaperIndex((i) => (i + 1) % WALLPAPERS.length);
+  };
+
   return (
     <>
-      <Scene level={sceneLevel} />
-      <div className="relative min-h-[calc(100vh-var(--navbar-height))] flex items-center">
-        <div className="px-8 md:px-16 lg:px-24 py-12 max-w-3xl">
-          {/* Blog title */}
+      <Scene level={sceneLevel} imageUrl={WALLPAPERS[wallpaperIndex]} isHome />
+
+      {/* Main layout — full viewport */}
+      <div className="fixed inset-0 flex flex-col pointer-events-none">
+
+        {/* Top spacer for navbar */}
+        <div style={{ height: 'var(--navbar-height)' }} />
+
+        {/* Center-left content */}
+        <div
+          className="flex-1 flex flex-col justify-center pointer-events-auto px-8 md:px-16 lg:px-24"
+          style={{ paddingBottom: '80px' }}
+        >
+          {/* Blog title — OW style large glowing text */}
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ type: 'spring', stiffness: 200, damping: 20, delay: 0.1 }}
-            className="mb-8"
+            className="mb-6"
+            initial={{ opacity: 0, x: -40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ type: 'spring', stiffness: 250, damping: 22, delay: 0.05 }}
           >
             <h1
-              className="ow-title font-black text-5xl md:text-7xl lg:text-8xl leading-none"
-              style={{ color: '#ffffff', textShadow: '0 0 60px rgba(65, 166, 246, 0.4), 0 0 20px rgba(255,255,255,0.1)' }}
+              style={{
+                fontSize: 'min(10vh, 72px)',
+                fontWeight: 'bold',
+                color: 'white',
+                textShadow: '0 0 5px white',
+                fontFamily: "'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif",
+                lineHeight: 1.1,
+              }}
             >
-              OW
+              OW BLOG
             </h1>
-            <h2
-              className="ow-title font-bold text-xl md:text-2xl tracking-[0.3em] uppercase mt-1"
-              style={{ color: 'var(--ow-primary)', textShadow: '0 0 20px rgba(249, 158, 26, 0.5)' }}
+            <p
+              style={{
+                fontSize: '13px',
+                color: 'rgba(255,255,255,0.6)',
+                marginTop: '4px',
+                textShadow: '0 0 2px black',
+                fontFamily: "'PingFang SC', 'Microsoft YaHei', sans-serif",
+              }}
             >
-              BLOG
-            </h2>
-            <p className="mt-3 text-sm" style={{ color: 'var(--ow-text-muted)', maxWidth: '320px', lineHeight: '1.6' }}>
-              守望先锋风格的个人博客 — 弹性物理动画，沉浸式游戏体验
+              v1.0.0 · 守望先锋风格个人博客
             </p>
           </motion.div>
 
-          {/* Divider */}
-          <motion.div
-            className="mb-8"
-            initial={{ scaleX: 0, opacity: 0 }}
-            animate={{ scaleX: 1, opacity: 1 }}
-            transition={{ type: 'spring', stiffness: 200, damping: 25, delay: 0.3 }}
-            style={{ originX: 0 }}
-          >
-            <div className="h-px w-48" style={{ background: 'linear-gradient(90deg, var(--ow-primary), transparent)' }} />
-          </motion.div>
-
           {/* Primary menu */}
-          <ul className="space-y-1 mb-4">
+          <ul style={{ padding: 0, margin: 0, marginBottom: '12px' }}>
             {primaryMenuItems.map((item, i) => (
               <MenuItem
                 key={item.route}
                 label={item.label}
-                subLabel={item.subLabel}
                 index={i}
                 isPrimary
                 onClick={() => handleNavigate(item.route)}
@@ -80,10 +104,10 @@ export default function Home() {
           </ul>
 
           {/* Secondary menu */}
-          <ul className="space-y-0.5 mt-6">
+          <ul style={{ padding: 0, margin: 0 }}>
             {secondaryMenuItems.map((item, i) => (
               <MenuItem
-                key={item.route}
+                key={item.route + i}
                 label={item.label}
                 index={primaryMenuItems.length + i}
                 isPrimary={false}
@@ -93,23 +117,48 @@ export default function Home() {
           </ul>
         </div>
 
-        {/* Side decoration */}
-        <motion.div
-          className="absolute right-8 top-1/2 -translate-y-1/2 hidden lg:flex flex-col items-center gap-3"
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 0.4, x: 0 }}
-          transition={{ delay: 0.6, type: 'spring', stiffness: 200 }}
+        {/* Bottom bar */}
+        <div
+          className="flex items-end justify-between px-8 md:px-16 lg:px-24 pb-6 pointer-events-auto"
         >
-          {[0, 1, 2, 3, 4].map((i) => (
-            <motion.div
-              key={i}
-              className="w-0.5 rounded-full"
-              style={{ background: 'var(--ow-accent)', height: i === 2 ? '48px' : '16px' }}
-              animate={{ opacity: [0.3, 1, 0.3] }}
-              transition={{ duration: 2, repeat: Infinity, delay: i * 0.2 }}
-            />
-          ))}
-        </motion.div>
+          {/* Bottom-left hint */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.6 }}
+            transition={{ delay: 0.8 }}
+            style={{
+              fontSize: '12px',
+              color: 'white',
+              textShadow: '0 0 4px black',
+              fontFamily: "'PingFang SC', 'Microsoft YaHei', sans-serif",
+            }}
+          >
+            按下回车开始聊天
+          </motion.p>
+
+          {/* Bottom-right: wallpaper switcher */}
+          <motion.button
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.9, type: 'spring', stiffness: 300 }}
+            whileHover={{ scale: 1.05, transition: { type: 'spring', stiffness: 400 } }}
+            whileTap={{ scale: 0.95 }}
+            onClick={switchWallpaper}
+            style={{
+              padding: '6px 14px',
+              background: 'rgba(249,158,26,0.85)',
+              color: '#1a1e2e',
+              fontSize: '12px',
+              fontWeight: 'bold',
+              border: 'none',
+              cursor: 'pointer',
+              fontFamily: "'PingFang SC', 'Microsoft YaHei', sans-serif",
+              clipPath: 'polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px))',
+            }}
+          >
+            切换壁纸
+          </motion.button>
+        </div>
       </div>
     </>
   );

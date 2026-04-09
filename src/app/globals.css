@@ -40,16 +40,20 @@
 
 html {
   height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
   background-color: var(--ow-bg-dark);
 }
 
 body {
   height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
   background-color: var(--ow-bg-dark);
   color: var(--ow-text);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
-  overflow-x: hidden;
-  overflow-y: auto;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 /* OW Panel style */
@@ -87,18 +91,20 @@ body {
   vertical-align: middle;
 }
 
-/* Scrollbar styling */
+/* Hide scrollbars — OW UI has no scrollbars */
 ::-webkit-scrollbar {
-  width: 4px;
+  display: none;
 }
 
-::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.2);
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
-::-webkit-scrollbar-thumb {
-  background: var(--ow-accent);
-  border-radius: 2px;
+/* Allow text selection in article/blog content only */
+article, .selectable {
+  user-select: text;
+  -webkit-user-select: text;
 }
 
 /* Custom cursor */
