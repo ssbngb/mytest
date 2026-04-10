@@ -126,7 +126,7 @@ export default function NavBar() {
                 color: '#b0d5e0',
                 fontSize: '14px',
                 lineHeight: 1,
-                fontFamily: "'PingFang SC', 'Microsoft YaHei', monospace",
+                fontFamily: "'PingFang SC', 'Microsoft YaHei', sans-serif",
                 flexShrink: 0,
               }}
             >
