@@ -26,34 +26,40 @@ export default function AboutPage() {
     <>
       <Scene level={SceneLevel.One} />
       <div
-        className="relative min-h-screen overflow-y-auto px-6 md:px-8 lg:px-12 py-8 max-w-4xl mx-auto"
-        style={{ paddingTop: 'calc(var(--navbar-height) + 2rem)' }}
+        className="relative min-h-screen overflow-y-auto px-8 md:px-16 lg:px-24"
+        style={{ paddingTop: 'calc(var(--navbar-height) + 2rem)', paddingBottom: '4rem' }}
       >
         {/* Header */}
         <motion.div
           className="mb-12"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, x: -40 }}
+          animate={{ opacity: 1, x: 0 }}
           transition={{ type: 'spring', stiffness: 250, damping: 22 }}
         >
           <h1
             style={{
-              fontSize: 'min(6vh, 52px)',
+              fontSize: 'min(8vh, 72px)',
               fontWeight: 'bold',
               fontStyle: 'italic',
               color: 'white',
               textShadow: '0 0 2px black',
-              display: 'inline-block',
-              transform: 'skewX(-4deg)',
+              lineHeight: 1.1,
               fontFamily: "'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif",
             }}
           >
             关于
           </h1>
-          <p className="mt-2 text-sm" style={{ color: 'rgba(255,255,255,0.55)', textShadow: '0 0 2px black' }}>
+          <p
+            style={{
+              fontSize: '13px',
+              color: 'rgba(255,255,255,0.5)',
+              marginTop: '4px',
+              textShadow: '0 0 2px black',
+              fontFamily: "'PingFang SC', 'Microsoft YaHei', sans-serif",
+            }}
+          >
             英雄档案 · HERO PROFILE
           </p>
-          <div className="mt-3 h-px w-24" style={{ background: 'linear-gradient(90deg, rgba(90,255,255,0.8), transparent)' }} />
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-8">

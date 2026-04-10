@@ -18,15 +18,22 @@ const secondaryMenuItems = [
   { label: '更新说明', route: '#' },
 ];
 
-const WALLPAPERS = [
-  'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1920&q=80',
-  'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1920&q=80',
-  'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1920&q=80',
+// CSS gradient presets — no external image dependencies
+const GRADIENT_THEMES = [
+  `radial-gradient(ellipse at 75% 25%, rgba(255, 220, 150, 0.15) 0%, transparent 50%),
+   radial-gradient(ellipse at 25% 35%, rgba(130, 180, 240, 0.25) 0%, transparent 55%),
+   linear-gradient(155deg, #1e3a5f 0%, #2a5080 20%, #3a6898 40%, #2e5580 60%, #1a3050 80%, #152840 100%)`,
+  `radial-gradient(ellipse at 80% 20%, rgba(249, 158, 26, 0.12) 0%, transparent 45%),
+   radial-gradient(ellipse at 20% 60%, rgba(90, 160, 240, 0.2) 0%, transparent 50%),
+   linear-gradient(155deg, #1a2f50 0%, #223566 25%, #1e2d5a 50%, #162248 75%, #0e1835 100%)`,
+  `radial-gradient(ellipse at 50% 10%, rgba(90, 255, 255, 0.1) 0%, transparent 50%),
+   radial-gradient(ellipse at 30% 70%, rgba(100, 150, 220, 0.2) 0%, transparent 50%),
+   linear-gradient(155deg, #162840 0%, #1e3854 25%, #2a4c6e 50%, #1e3050 75%, #101e34 100%)`,
 ];
 
 export default function Home() {
   const [sceneLevel, setSceneLevel] = useState<SceneLevel>(SceneLevel.Zero);
-  const [wallpaperIndex, setWallpaperIndex] = useState(0);
+  const [themeIndex, setThemeIndex] = useState(0);
   const router = useRouter();
 
   const handleNavigate = (route: string) => {
@@ -40,12 +47,12 @@ export default function Home() {
   };
 
   const switchWallpaper = () => {
-    setWallpaperIndex((i) => (i + 1) % WALLPAPERS.length);
+    setThemeIndex((i) => (i + 1) % GRADIENT_THEMES.length);
   };
 
   return (
     <>
-      <Scene level={sceneLevel} imageUrl={WALLPAPERS[wallpaperIndex]} isHome />
+      <Scene level={sceneLevel} isHome customBg={GRADIENT_THEMES[themeIndex]} />
 
       {/* Main layout — full viewport */}
       <div className="fixed inset-0 flex flex-col pointer-events-none">

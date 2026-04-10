@@ -43,9 +43,9 @@ export default function NavBar() {
       className="fixed top-0 left-0 right-0 z-50"
       style={{
         height: 'var(--navbar-height)',
-        background: isHome ? 'transparent' : 'rgba(40, 53, 82, 0.92)',
-        backdropFilter: isHome ? 'none' : 'blur(12px)',
-        WebkitBackdropFilter: isHome ? 'none' : 'blur(12px)',
+        background: isHome ? 'transparent' : 'rgba(25, 35, 60, 0.92)',
+        backdropFilter: isHome ? 'none' : 'blur(16px)',
+        WebkitBackdropFilter: isHome ? 'none' : 'blur(16px)',
         borderBottom: isHome ? 'none' : '1px solid rgba(65,166,246,0.2)',
         transition: 'background 0.4s ease, backdrop-filter 0.4s ease',
       }}
