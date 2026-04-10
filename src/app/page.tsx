@@ -18,15 +18,29 @@ const secondaryMenuItems = [
   { label: '更新说明', route: '#' },
 ];
 
-const WALLPAPERS = [
-  'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1920&q=80',
-  'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1920&q=80',
-  'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1920&q=80',
+// CSS gradient presets — no external image dependencies
+const GRADIENT_PRESETS = [
+  // Blue atmosphere (default OW)
+  `radial-gradient(ellipse at 25% 35%, rgba(100,190,255,0.4) 0%, transparent 55%),
+   radial-gradient(ellipse at 75% 20%, rgba(80,165,245,0.3) 0%, transparent 45%),
+   radial-gradient(ellipse at 85% 75%, rgba(60,130,210,0.2) 0%, transparent 50%),
+   radial-gradient(ellipse at 15% 80%, rgba(40,100,180,0.25) 0%, transparent 40%),
+   linear-gradient(155deg, #1e3a5f 0%, #2a5080 30%, #3a6898 55%, #2e5580 75%, #1a3050 100%)`,
+  // Purple-blue (deep space feel)
+  `radial-gradient(ellipse at 30% 30%, rgba(140,100,255,0.35) 0%, transparent 50%),
+   radial-gradient(ellipse at 70% 65%, rgba(80,60,200,0.25) 0%, transparent 45%),
+   radial-gradient(ellipse at 15% 75%, rgba(60,40,180,0.2) 0%, transparent 40%),
+   linear-gradient(155deg, #1a1550 0%, #25208a 30%, #2e2878 55%, #1e1c60 75%, #120f3a 100%)`,
+  // Teal ocean
+  `radial-gradient(ellipse at 25% 30%, rgba(60,220,200,0.3) 0%, transparent 50%),
+   radial-gradient(ellipse at 75% 65%, rgba(40,180,220,0.25) 0%, transparent 45%),
+   radial-gradient(ellipse at 50% 85%, rgba(20,140,180,0.2) 0%, transparent 40%),
+   linear-gradient(155deg, #0a2a35 0%, #154050 30%, #1a5060 55%, #0e3848 75%, #081c28 100%)`,
 ];
 
 export default function Home() {
   const [sceneLevel, setSceneLevel] = useState<SceneLevel>(SceneLevel.Zero);
-  const [wallpaperIndex, setWallpaperIndex] = useState(0);
+  const [gradientIndex, setGradientIndex] = useState(0);
   const router = useRouter();
 
   const handleNavigate = (route: string) => {
@@ -39,13 +53,13 @@ export default function Home() {
     setTimeout(() => router.push(route), 300);
   };
 
-  const switchWallpaper = () => {
-    setWallpaperIndex((i) => (i + 1) % WALLPAPERS.length);
+  const switchGradient = () => {
+    setGradientIndex((i) => (i + 1) % GRADIENT_PRESETS.length);
   };
 
   return (
     <>
-      <Scene level={sceneLevel} imageUrl={WALLPAPERS[wallpaperIndex]} isHome />
+      <Scene level={sceneLevel} bgGradient={GRADIENT_PRESETS[gradientIndex]} isHome />
 
       {/* Main layout — full viewport */}
       <div className="fixed inset-0 flex flex-col pointer-events-none">
@@ -178,7 +192,7 @@ export default function Home() {
               transition={{ delay: 0.9, type: 'spring', stiffness: 300 }}
               whileHover={{ scale: 1.05, transition: { type: 'spring', stiffness: 400 } }}
               whileTap={{ scale: 0.95 }}
-              onClick={switchWallpaper}
+              onClick={switchGradient}
               style={{
                 padding: '6px 14px',
                 background: 'rgba(249,158,26,0.85)',

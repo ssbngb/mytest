@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { Post } from '@/data/posts';
@@ -9,23 +10,9 @@ interface BlogCardProps {
   index: number;
 }
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 30, scale: 0.96 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      delay: i * 0.08,
-      type: 'spring',
-      stiffness: 250,
-      damping: 22,
-      mass: 0.9,
-    },
-  }),
-};
-
 export default function BlogCard({ post, index }: BlogCardProps) {
+  const [hovered, setHovered] = useState(false);
+
   const formattedDate = new Date(post.date).toLocaleDateString('zh-CN', {
     year: 'numeric',
     month: 'long',
@@ -33,78 +20,71 @@ export default function BlogCard({ post, index }: BlogCardProps) {
   });
 
   return (
-    <motion.div
-      custom={index}
-      variants={cardVariants}
-      initial="hidden"
-      animate="visible"
-      whileHover={{
-        y: -4,
-        scale: 1.02,
-        transition: { type: 'spring', stiffness: 400, damping: 20 },
+    <motion.li
+      style={{ listStyle: 'none' }}
+      initial={{ opacity: 0, x: -40, scaleX: 0.88 }}
+      animate={{ opacity: 1, x: 0, scaleX: 1 }}
+      transition={{
+        delay: index * 0.07,
+        type: 'spring',
+        stiffness: 280,
+        damping: 22,
+        mass: 0.85,
       }}
     >
-      <Link href={`/blog/${post.slug}`} className="block">
-        <div
-          className="ow-panel rounded-sm p-5 group"
-          style={{
-            borderLeft: '3px solid var(--ow-accent)',
-            transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
-          }}
-          onMouseEnter={(e) => {
-            (e.currentTarget as HTMLElement).style.borderLeftColor = 'var(--ow-primary)';
-            (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 32px rgba(65, 166, 246, 0.2)';
-          }}
-          onMouseLeave={(e) => {
-            (e.currentTarget as HTMLElement).style.borderLeftColor = 'var(--ow-accent)';
-            (e.currentTarget as HTMLElement).style.boxShadow = 'none';
-          }}
+      <Link href={`/blog/${post.slug}`} style={{ textDecoration: 'none' }}>
+        <motion.div
+          animate={{ x: hovered ? 48 : 0, scale: hovered ? 1.05 : 1 }}
+          transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+          onHoverStart={() => setHovered(true)}
+          onHoverEnd={() => setHovered(false)}
+          whileTap={{ scale: 0.97, x: 28, transition: { type: 'spring', stiffness: 600, damping: 25 } }}
+          style={{ cursor: 'pointer', originX: 0 }}
         >
-          {/* Tags */}
-          <div className="flex gap-2 mb-2">
+          <span
+            style={{
+              display: 'block',
+              fontSize: 'min(5.5vh, 48px)',
+              lineHeight: 1.2,
+              fontWeight: 'bold',
+              fontStyle: 'italic',
+              color: hovered ? 'rgba(90,210,255,1)' : 'white',
+              textShadow: hovered
+                ? '0 0 24px rgba(90,210,255,0.6), 0 0 4px rgba(0,0,0,0.9)'
+                : '0 0 4px rgba(0,0,0,0.9)',
+              fontFamily: "'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif",
+              transition: 'color 0.15s ease, text-shadow 0.15s ease',
+            }}
+          >
+            {post.title}
+          </span>
+          <div style={{ display: 'flex', gap: '12px', marginTop: '4px', alignItems: 'center' }}>
+            <span
+              style={{
+                fontSize: '11px',
+                color: 'rgba(255,255,255,0.45)',
+                fontFamily: "'PingFang SC', 'Microsoft YaHei', sans-serif",
+              }}
+            >
+              {formattedDate}
+            </span>
             {post.tags.map((tag) => (
               <span
                 key={tag}
-                className="text-xs px-2 py-0.5 rounded-sm ow-title tracking-wider uppercase"
                 style={{
-                  background: 'rgba(65, 166, 246, 0.15)',
-                  color: 'var(--ow-accent)',
-                  border: '1px solid rgba(65, 166, 246, 0.3)',
+                  fontSize: '10px',
+                  color: 'rgba(90,210,255,0.7)',
+                  fontFamily: "'PingFang SC', 'Microsoft YaHei', sans-serif",
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.05em',
                 }}
               >
                 {tag}
               </span>
             ))}
           </div>
-
-          {/* Title */}
-          <h2
-            className="ow-title text-xl font-bold mb-2 group-hover:text-[color:var(--ow-accent)] transition-colors"
-            style={{ color: 'var(--ow-text)' }}
-          >
-            {post.title}
-          </h2>
-
-          {/* Excerpt */}
-          <p className="text-sm mb-3" style={{ color: 'var(--ow-text-muted)', lineHeight: '1.6' }}>
-            {post.excerpt}
-          </p>
-
-          {/* Footer */}
-          <div className="flex items-center justify-between">
-            <span className="text-xs" style={{ color: 'var(--ow-text-muted)' }}>
-              {formattedDate}
-            </span>
-            <motion.span
-              className="text-xs ow-title tracking-wider uppercase"
-              style={{ color: 'var(--ow-accent)' }}
-              whileHover={{ x: 4, transition: { type: 'spring', stiffness: 400 } }}
-            >
-              阅读全文 →
-            </motion.span>
-          </div>
-        </div>
+        </motion.div>
       </Link>
-    </motion.div>
+    </motion.li>
   );
 }

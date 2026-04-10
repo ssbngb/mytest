@@ -24,9 +24,9 @@ const abilityItems = [
 export default function AboutPage() {
   return (
     <>
-      <Scene level={SceneLevel.One} />
+      <Scene level={SceneLevel.Zero} />
       <div
-        className="relative min-h-screen overflow-y-auto px-6 md:px-8 lg:px-12 py-8 max-w-4xl mx-auto"
+        className="relative min-h-screen overflow-y-auto px-8 md:px-16 lg:px-24 py-8 max-w-4xl"
         style={{ paddingTop: 'calc(var(--navbar-height) + 2rem)' }}
       >
         {/* Header */}
@@ -38,22 +38,20 @@ export default function AboutPage() {
         >
           <h1
             style={{
-              fontSize: 'min(6vh, 52px)',
+              fontSize: 'min(9vh, 68px)',
               fontWeight: 'bold',
               fontStyle: 'italic',
               color: 'white',
-              textShadow: '0 0 2px black',
-              display: 'inline-block',
-              transform: 'skewX(-4deg)',
+              textShadow: '0 0 4px rgba(0,0,0,0.9), 0 0 20px rgba(90,190,255,0.25)',
               fontFamily: "'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif",
+              lineHeight: 1.1,
             }}
           >
             关于
           </h1>
-          <p className="mt-2 text-sm" style={{ color: 'rgba(255,255,255,0.55)', textShadow: '0 0 2px black' }}>
+          <p className="mt-2 text-sm" style={{ color: 'rgba(255,255,255,0.5)', textShadow: '0 0 2px black', fontFamily: "'PingFang SC', 'Microsoft YaHei', sans-serif" }}>
             英雄档案 · HERO PROFILE
           </p>
-          <div className="mt-3 h-px w-24" style={{ background: 'linear-gradient(90deg, rgba(90,255,255,0.8), transparent)' }} />
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-8">

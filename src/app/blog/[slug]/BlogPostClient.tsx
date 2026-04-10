@@ -53,11 +53,12 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
             {post.tags.map((tag) => (
               <span
                 key={tag}
-                className="text-xs px-2 py-0.5 rounded-sm ow-title tracking-wider uppercase"
+                className="text-xs px-2 py-0.5 rounded-sm tracking-wider uppercase"
                 style={{
                   background: 'rgba(65, 166, 246, 0.15)',
                   color: 'var(--ow-accent)',
                   border: '1px solid rgba(65, 166, 246, 0.3)',
+                  fontFamily: "'PingFang SC', 'Microsoft YaHei', sans-serif",
                 }}
               >
                 {tag}
@@ -65,32 +66,38 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
             ))}
           </div>
 
-          {/* Title with OW decoration */}
-          <div className="flex items-start gap-4">
-            <div
-              className="flex-shrink-0 w-1.5 rounded-full mt-1"
-              style={{ background: 'linear-gradient(180deg, var(--ow-primary), var(--ow-accent))', height: '100%', minHeight: '60px' }}
-            />
-            <div>
-              <h1
-                className="ow-title font-black text-3xl md:text-4xl lg:text-5xl leading-tight"
-                style={{ color: 'var(--ow-text)' }}
-              >
-                {post.title}
-              </h1>
-              <p className="mt-2 text-sm" style={{ color: 'var(--ow-text-muted)' }}>
-                {formattedDate}
-              </p>
-            </div>
-          </div>
+          {/* Title — OW bold italic style */}
+          <h1
+            style={{
+              fontSize: 'min(6vh, 52px)',
+              fontWeight: 'bold',
+              fontStyle: 'italic',
+              color: 'white',
+              textShadow: '0 0 4px rgba(0,0,0,0.9), 0 0 20px rgba(90,190,255,0.2)',
+              fontFamily: "'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif",
+              lineHeight: 1.2,
+              marginBottom: '8px',
+            }}
+          >
+            {post.title}
+          </h1>
+          <p className="text-sm" style={{ color: 'rgba(255,255,255,0.5)', fontFamily: "'PingFang SC', sans-serif" }}>
+            {formattedDate}
+          </p>
 
           {/* Divider */}
-          <div className="mt-6 h-px" style={{ background: 'linear-gradient(90deg, var(--ow-primary), var(--ow-accent), transparent)' }} />
+          <div className="mt-5 h-px" style={{ background: 'linear-gradient(90deg, rgba(90,210,255,0.8), rgba(65,166,246,0.4), transparent)' }} />
         </motion.header>
 
         {/* Article content */}
         <motion.article
-          className="ow-panel rounded-sm p-6 md:p-8"
+          className="rounded-sm p-6 md:p-8"
+          style={{
+            background: 'rgba(15,25,45,0.75)',
+            border: '1px solid rgba(65,166,246,0.2)',
+            backdropFilter: 'blur(16px)',
+            WebkitBackdropFilter: 'blur(16px)',
+          }}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ type: 'spring', stiffness: 250, damping: 22, delay: 0.2 }}

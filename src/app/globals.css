@@ -58,10 +58,10 @@ body {
 
 /* OW Panel style */
 .ow-panel {
-  background: var(--ow-bg-panel);
+  background: rgba(15, 25, 45, 0.75);
   border: 1px solid var(--ow-border);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
 /* OW Title style */
