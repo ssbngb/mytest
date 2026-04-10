@@ -6,6 +6,9 @@ import { motion } from 'framer-motion';
 import Scene from '@/components/Scene';
 import MenuItem from '@/components/MenuItem';
 import { SceneLevel } from '@/lib/constants';
+import { OW_GRADIENT_PALETTES } from '@/components/Scene';
+
+const PALETTE_COUNT = OW_GRADIENT_PALETTES.length;
 
 const primaryMenuItems = [
   { label: '博客', route: '/blog' },
@@ -18,15 +21,9 @@ const secondaryMenuItems = [
   { label: '更新说明', route: '#' },
 ];
 
-const WALLPAPERS = [
-  'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1920&q=80',
-  'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1920&q=80',
-  'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1920&q=80',
-];
-
 export default function Home() {
   const [sceneLevel, setSceneLevel] = useState<SceneLevel>(SceneLevel.Zero);
-  const [wallpaperIndex, setWallpaperIndex] = useState(0);
+  const [gradientIndex, setGradientIndex] = useState(0);
   const router = useRouter();
 
   const handleNavigate = (route: string) => {
@@ -39,13 +36,13 @@ export default function Home() {
     setTimeout(() => router.push(route), 300);
   };
 
-  const switchWallpaper = () => {
-    setWallpaperIndex((i) => (i + 1) % WALLPAPERS.length);
+  const switchGradient = () => {
+    setGradientIndex((i) => (i + 1) % PALETTE_COUNT);
   };
 
   return (
     <>
-      <Scene level={sceneLevel} imageUrl={WALLPAPERS[wallpaperIndex]} isHome />
+      <Scene level={sceneLevel} gradientIndex={gradientIndex} isHome />
 
       {/* Main layout — full viewport */}
       <div className="fixed inset-0 flex flex-col pointer-events-none">
@@ -136,7 +133,7 @@ export default function Home() {
             按下回车开始聊天
           </motion.p>
 
-          {/* Bottom-right: activity banner + wallpaper switcher */}
+          {/* Bottom-right: activity banner + gradient switcher */}
           <div className="flex flex-col items-end gap-3">
             {/* Activity announcement banner */}
             <motion.div
@@ -171,14 +168,14 @@ export default function Home() {
               </p>
             </motion.div>
 
-            {/* Wallpaper switcher */}
+            {/* Gradient switcher */}
             <motion.button
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.9, type: 'spring', stiffness: 300 }}
               whileHover={{ scale: 1.05, transition: { type: 'spring', stiffness: 400 } }}
               whileTap={{ scale: 0.95 }}
-              onClick={switchWallpaper}
+              onClick={switchGradient}
               style={{
                 padding: '6px 14px',
                 background: 'rgba(249,158,26,0.85)',
@@ -191,7 +188,7 @@ export default function Home() {
                 clipPath: 'polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px))',
               }}
             >
-              切换壁纸
+              切换配色
             </motion.button>
           </div>
         </div>

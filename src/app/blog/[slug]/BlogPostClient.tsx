@@ -90,10 +90,17 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
 
         {/* Article content */}
         <motion.article
-          className="ow-panel rounded-sm p-6 md:p-8"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ type: 'spring', stiffness: 250, damping: 22, delay: 0.2 }}
+          style={{
+            background: 'rgba(15, 25, 45, 0.75)',
+            border: '1px solid rgba(65,166,246,0.2)',
+            backdropFilter: 'blur(16px)',
+            WebkitBackdropFilter: 'blur(16px)',
+            borderRadius: '2px',
+            padding: '1.5rem 2rem',
+          }}
         >
           <div
             className="prose prose-invert max-w-none"

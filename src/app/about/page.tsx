@@ -21,39 +21,62 @@ const abilityItems = [
   { icon: '📱', title: '响应式设计', desc: '从移动端到桌面端的无缝体验适配' },
 ];
 
+const panelStyle: React.CSSProperties = {
+  background: 'rgba(15, 25, 45, 0.75)',
+  border: '1px solid rgba(65,166,246,0.2)',
+  backdropFilter: 'blur(16px)',
+  WebkitBackdropFilter: 'blur(16px)',
+  borderRadius: '2px',
+  padding: '1.5rem',
+};
+
 export default function AboutPage() {
   return (
     <>
       <Scene level={SceneLevel.One} />
       <div
-        className="relative min-h-screen overflow-y-auto px-6 md:px-8 lg:px-12 py-8 max-w-4xl mx-auto"
-        style={{ paddingTop: 'calc(var(--navbar-height) + 2rem)' }}
+        className="relative min-h-screen overflow-y-auto px-8 md:px-16 lg:px-24"
+        style={{ paddingTop: 'calc(var(--navbar-height) + 2.5rem)', paddingBottom: '4rem' }}
       >
-        {/* Header */}
+        {/* Header — OW large italic style */}
         <motion.div
-          className="mb-12"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ type: 'spring', stiffness: 250, damping: 22 }}
+          className="mb-10"
+          initial={{ opacity: 0, x: -40 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ type: 'spring', stiffness: 280, damping: 22 }}
         >
           <h1
             style={{
-              fontSize: 'min(6vh, 52px)',
+              fontSize: 'min(8vh, 64px)',
               fontWeight: 'bold',
               fontStyle: 'italic',
               color: 'white',
-              textShadow: '0 0 2px black',
-              display: 'inline-block',
-              transform: 'skewX(-4deg)',
+              textShadow: '0 0 4px rgba(0,0,0,0.8)',
               fontFamily: "'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif",
+              lineHeight: 1.1,
             }}
           >
             关于
           </h1>
-          <p className="mt-2 text-sm" style={{ color: 'rgba(255,255,255,0.55)', textShadow: '0 0 2px black' }}>
+          <p
+            style={{
+              marginTop: '6px',
+              fontSize: '13px',
+              color: 'rgba(255,255,255,0.5)',
+              textShadow: '0 0 2px black',
+              fontFamily: "'PingFang SC', 'Microsoft YaHei', sans-serif",
+            }}
+          >
             英雄档案 · HERO PROFILE
           </p>
-          <div className="mt-3 h-px w-24" style={{ background: 'linear-gradient(90deg, rgba(90,255,255,0.8), transparent)' }} />
+          <div
+            className="mt-3"
+            style={{
+              height: '2px',
+              width: '48px',
+              background: 'linear-gradient(90deg, rgba(90,255,255,0.9), transparent)',
+            }}
+          />
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-8">
@@ -63,14 +86,14 @@ export default function AboutPage() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ type: 'spring', stiffness: 250, damping: 22, delay: 0.1 }}
           >
-            <div className="ow-panel rounded-sm p-6">
+            <div style={panelStyle}>
               {/* Avatar section */}
               <div className="flex items-center gap-4 mb-6">
                 <motion.div
                   className="w-16 h-16 flex items-center justify-center font-black text-2xl"
                   style={{
-                    background: 'linear-gradient(135deg, var(--ow-accent), var(--ow-bg-dark))',
-                    border: '2px solid var(--ow-accent)',
+                    background: 'linear-gradient(135deg, var(--ow-accent), #0a1a30)',
+                    border: '2px solid rgba(65,166,246,0.5)',
                     color: 'var(--ow-text)',
                     fontFamily: "'PingFang SC', 'Microsoft YaHei', sans-serif",
                   }}
@@ -95,8 +118,8 @@ export default function AboutPage() {
                 ].map((stat) => (
                   <div
                     key={stat.label}
-                    className="text-center p-3 rounded-sm"
-                    style={{ background: 'rgba(65, 166, 246, 0.1)', border: '1px solid var(--ow-border)' }}
+                    className="text-center p-3"
+                    style={{ background: 'rgba(65, 166, 246, 0.1)', border: '1px solid rgba(65,166,246,0.2)' }}
                   >
                     <div className="font-black text-xl" style={{ color: 'var(--ow-primary)', fontFamily: "'PingFang SC', 'Microsoft YaHei', sans-serif" }}>
                       {stat.value}
@@ -127,7 +150,7 @@ export default function AboutPage() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ type: 'spring', stiffness: 250, damping: 22, delay: 0.2 }}
           >
-            <div className="ow-panel rounded-sm p-6">
+            <div style={panelStyle}>
               <h3 className="font-bold text-sm tracking-widest uppercase mb-5" style={{ color: 'var(--ow-accent)', fontFamily: "'PingFang SC', 'Microsoft YaHei', sans-serif" }}>
                 技能面板 / SKILLS
               </h3>
@@ -176,7 +199,14 @@ export default function AboutPage() {
             {abilityItems.map((ability, i) => (
               <motion.div
                 key={ability.title}
-                className="ow-panel rounded-sm p-4"
+                style={{
+                  background: 'rgba(15, 25, 45, 0.75)',
+                  border: '1px solid rgba(65,166,246,0.2)',
+                  backdropFilter: 'blur(16px)',
+                  WebkitBackdropFilter: 'blur(16px)',
+                  borderRadius: '2px',
+                  padding: '1rem',
+                }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 + i * 0.08, type: 'spring', stiffness: 250, damping: 22 }}
