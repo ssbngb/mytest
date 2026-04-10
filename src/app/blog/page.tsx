@@ -23,7 +23,7 @@ export default function BlogPage() {
         >
           <h1
             style={{
-              fontSize: 'min(8vh, 64px)',
+              fontSize: 'clamp(32px, 8vh, 64px)',
               fontWeight: 'bold',
               fontStyle: 'italic',
               color: 'white',

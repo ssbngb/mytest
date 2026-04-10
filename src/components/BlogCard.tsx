@@ -27,7 +27,7 @@ const rowVariants = {
 export default function BlogCard({ post, index }: BlogCardProps) {
   const formattedDate = new Date(post.date).toLocaleDateString('zh-CN', {
     year: 'numeric',
-    month: 'numeric',
+    month: 'long',
     day: 'numeric',
   });
 
@@ -58,7 +58,7 @@ export default function BlogCard({ post, index }: BlogCardProps) {
           <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: '16px' }}>
             <h2
               style={{
-                fontSize: 'min(4.5vh, 38px)',
+                fontSize: 'clamp(20px, 4.5vh, 38px)',
                 fontWeight: 'bold',
                 fontStyle: 'italic',
                 color: 'white',
