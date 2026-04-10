@@ -50,10 +50,17 @@ export default function Scene({ level, imageUrl, isHome = false, gradientVariant
   };
 
   const getImageOpacity = (lvl: SceneLevel): number => {
+    if (isHome) {
+      switch (lvl) {
+        case SceneLevel.Zero: return 0.85;
+        case SceneLevel.One: return 0.65;
+        case SceneLevel.Fill: return 0.45;
+      }
+    }
     switch (lvl) {
-      case SceneLevel.Zero: return 0.85;
-      case SceneLevel.One: return 0.65;
-      case SceneLevel.Fill: return 0.45;
+      case SceneLevel.Zero: return 0.65;
+      case SceneLevel.One: return 0.50;
+      case SceneLevel.Fill: return 0.35;
     }
   };
 

@@ -10,8 +10,8 @@
   --ow-accent: #41a6f6;
   --ow-accent-glow: #5affff;
   --ow-bg-dark: #1a1e2e;
-  --ow-bg-panel: rgba(28, 38, 60, 0.85);
-  --ow-bg-panel-light: rgba(40, 53, 82, 0.8);
+  --ow-bg-panel: rgba(15, 25, 45, 0.75);
+  --ow-bg-panel-light: rgba(30, 45, 72, 0.7);
   --ow-text: #e8edf3;
   --ow-text-muted: #7e8a9e;
   --ow-status-online: #7cff00;
@@ -19,8 +19,8 @@
   --ow-status-away: #f7cc1d;
   --ow-status-offline: #7e7e7e;
   --ow-danger: #ff4655;
-  --ow-border: rgba(65, 166, 246, 0.25);
-  --ow-border-hover: rgba(65, 166, 246, 0.6);
+  --ow-border: rgba(100, 170, 240, 0.2);
+  --ow-border-hover: rgba(100, 170, 240, 0.5);
 
   /* OW Easing Functions */
   --ow-ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -58,8 +58,8 @@ body {
 
 /* OW Panel style */
 .ow-panel {
-  background: rgba(15, 25, 45, 0.75);
-  border: 1px solid rgba(100, 170, 240, 0.2);
+  background: var(--ow-bg-panel);
+  border: 1px solid var(--ow-border);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
 }
