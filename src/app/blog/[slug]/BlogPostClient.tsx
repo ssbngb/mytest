@@ -65,27 +65,27 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
             ))}
           </div>
 
-          {/* Title with OW decoration */}
-          <div className="flex items-start gap-4">
-            <div
-              className="flex-shrink-0 w-1.5 rounded-full mt-1"
-              style={{ background: 'linear-gradient(180deg, var(--ow-primary), var(--ow-accent))', height: '100%', minHeight: '60px' }}
-            />
-            <div>
-              <h1
-                className="ow-title font-black text-3xl md:text-4xl lg:text-5xl leading-tight"
-                style={{ color: 'var(--ow-text)' }}
-              >
-                {post.title}
-              </h1>
-              <p className="mt-2 text-sm" style={{ color: 'var(--ow-text-muted)' }}>
-                {formattedDate}
-              </p>
-            </div>
-          </div>
+          {/* Title — OW large italic */}
+          <h1
+            style={{
+              fontSize: 'min(6vh, 48px)',
+              fontWeight: 'bold',
+              fontStyle: 'italic',
+              color: 'white',
+              textShadow: '0 0 4px black, 0 2px 12px rgba(0,0,0,0.5)',
+              fontFamily: "'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif",
+              lineHeight: 1.2,
+              marginBottom: '8px',
+            }}
+          >
+            {post.title}
+          </h1>
+          <p className="text-sm" style={{ color: 'rgba(255,255,255,0.5)', textShadow: '0 0 2px black' }}>
+            {formattedDate}
+          </p>
 
           {/* Divider */}
-          <div className="mt-6 h-px" style={{ background: 'linear-gradient(90deg, var(--ow-primary), var(--ow-accent), transparent)' }} />
+          <div className="mt-6 h-px" style={{ background: 'linear-gradient(90deg, rgba(90,255,255,0.8), rgba(65,166,246,0.4), transparent)' }} />
         </motion.header>
 
         {/* Article content */}

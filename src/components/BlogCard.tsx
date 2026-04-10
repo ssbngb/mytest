@@ -48,15 +48,15 @@ export default function BlogCard({ post, index }: BlogCardProps) {
         <div
           className="ow-panel rounded-sm p-5 group"
           style={{
-            borderLeft: '3px solid var(--ow-accent)',
+            borderLeft: '3px solid rgba(90,255,255,0.6)',
             transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
           }}
           onMouseEnter={(e) => {
             (e.currentTarget as HTMLElement).style.borderLeftColor = 'var(--ow-primary)';
-            (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 32px rgba(65, 166, 246, 0.2)';
+            (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 32px rgba(65, 166, 246, 0.25)';
           }}
           onMouseLeave={(e) => {
-            (e.currentTarget as HTMLElement).style.borderLeftColor = 'var(--ow-accent)';
+            (e.currentTarget as HTMLElement).style.borderLeftColor = 'rgba(90,255,255,0.6)';
             (e.currentTarget as HTMLElement).style.boxShadow = 'none';
           }}
         >
