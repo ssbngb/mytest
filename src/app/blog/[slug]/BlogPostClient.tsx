@@ -25,7 +25,7 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
       <Scene level={SceneLevel.Fill} />
       <div
         className="relative min-h-screen overflow-y-auto px-6 md:px-8 lg:px-12 py-8 max-w-3xl mx-auto"
-        style={{ paddingTop: 'calc(var(--navbar-height) + 2rem)' }}
+        style={{ paddingTop: 'calc(var(--navbar-height) + 2rem)', paddingBottom: '4rem' }}
       >
         {/* Back button */}
         <motion.div
@@ -53,11 +53,15 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
             {post.tags.map((tag) => (
               <span
                 key={tag}
-                className="text-xs px-2 py-0.5 rounded-sm ow-title tracking-wider uppercase"
                 style={{
+                  fontSize: '11px',
+                  padding: '2px 8px',
                   background: 'rgba(65, 166, 246, 0.15)',
-                  color: 'var(--ow-accent)',
+                  color: 'rgba(90, 200, 255, 0.85)',
                   border: '1px solid rgba(65, 166, 246, 0.3)',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.05em',
+                  fontFamily: "'PingFang SC', 'Microsoft YaHei', sans-serif",
                 }}
               >
                 {tag}
@@ -65,38 +69,44 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
             ))}
           </div>
 
-          {/* Title with OW decoration */}
-          <div className="flex items-start gap-4">
-            <div
-              className="flex-shrink-0 w-1.5 rounded-full mt-1"
-              style={{ background: 'linear-gradient(180deg, var(--ow-primary), var(--ow-accent))', height: '100%', minHeight: '60px' }}
-            />
-            <div>
-              <h1
-                className="ow-title font-black text-3xl md:text-4xl lg:text-5xl leading-tight"
-                style={{ color: 'var(--ow-text)' }}
-              >
-                {post.title}
-              </h1>
-              <p className="mt-2 text-sm" style={{ color: 'var(--ow-text-muted)' }}>
-                {formattedDate}
-              </p>
-            </div>
-          </div>
+          {/* Title */}
+          <h1
+            style={{
+              fontSize: 'min(7vh, 56px)',
+              fontWeight: 'bold',
+              fontStyle: 'italic',
+              color: 'white',
+              textShadow: '0 0 2px black',
+              lineHeight: 1.2,
+              fontFamily: "'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif",
+            }}
+          >
+            {post.title}
+          </h1>
+          <p className="mt-2 text-sm" style={{ color: 'rgba(255,255,255,0.5)', fontFamily: "'PingFang SC', 'Microsoft YaHei', sans-serif" }}>
+            {formattedDate}
+          </p>
 
           {/* Divider */}
-          <div className="mt-6 h-px" style={{ background: 'linear-gradient(90deg, var(--ow-primary), var(--ow-accent), transparent)' }} />
+          <div className="mt-4 h-px" style={{ background: 'linear-gradient(90deg, rgba(249,158,26,0.8), rgba(65,166,246,0.6), transparent)' }} />
         </motion.header>
 
-        {/* Article content */}
+        {/* Article content — semi-transparent deep blue panel */}
         <motion.article
-          className="ow-panel rounded-sm p-6 md:p-8"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ type: 'spring', stiffness: 250, damping: 22, delay: 0.2 }}
+          style={{
+            background: 'rgba(15, 25, 45, 0.75)',
+            border: '1px solid rgba(100, 170, 240, 0.2)',
+            backdropFilter: 'blur(16px)',
+            WebkitBackdropFilter: 'blur(16px)',
+            borderRadius: '2px',
+            padding: '1.5rem 2rem',
+          }}
         >
           <div
-            className="prose prose-invert max-w-none"
+            className="selectable"
             style={{
               color: 'var(--ow-text)',
               lineHeight: '1.8',
@@ -104,7 +114,7 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
           >
             {lines.map((line, i) => {
               if (line.startsWith('# ')) {
-                return <h1 key={i} className="ow-title text-2xl font-black mt-8 mb-4" style={{ color: 'var(--ow-text)' }}>{line.slice(2)}</h1>;
+                return <h1 key={i} className="ow-title text-2xl font-black mt-8 mb-4" style={{ color: 'white' }}>{line.slice(2)}</h1>;
               } else if (line.startsWith('## ')) {
                 return (
                   <h2 key={i} className="ow-title text-xl font-bold mt-6 mb-3 flex items-center gap-2" style={{ color: 'var(--ow-accent)' }}>

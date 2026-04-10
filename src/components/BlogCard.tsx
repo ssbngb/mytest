@@ -9,18 +9,17 @@ interface BlogCardProps {
   index: number;
 }
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 30, scale: 0.96 },
+const rowVariants = {
+  hidden: { opacity: 0, x: -40 },
   visible: (i: number) => ({
     opacity: 1,
-    y: 0,
-    scale: 1,
+    x: 0,
     transition: {
-      delay: i * 0.08,
+      delay: i * 0.07,
       type: 'spring',
-      stiffness: 250,
+      stiffness: 280,
       damping: 22,
-      mass: 0.9,
+      mass: 0.8,
     },
   }),
 };
@@ -35,73 +34,67 @@ export default function BlogCard({ post, index }: BlogCardProps) {
   return (
     <motion.div
       custom={index}
-      variants={cardVariants}
+      variants={rowVariants}
       initial="hidden"
       animate="visible"
       whileHover={{
-        y: -4,
-        scale: 1.02,
+        x: 48,
+        scale: 1.03,
         transition: { type: 'spring', stiffness: 400, damping: 20 },
       }}
+      whileTap={{
+        scale: 0.98,
+        transition: { type: 'spring', stiffness: 600, damping: 25 },
+      }}
+      style={{ originX: 0 }}
     >
-      <Link href={`/blog/${post.slug}`} className="block">
+      <Link href={`/blog/${post.slug}`} className="block no-underline">
         <div
-          className="ow-panel rounded-sm p-5 group"
           style={{
-            borderLeft: '3px solid var(--ow-accent)',
-            transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
-          }}
-          onMouseEnter={(e) => {
-            (e.currentTarget as HTMLElement).style.borderLeftColor = 'var(--ow-primary)';
-            (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 32px rgba(65, 166, 246, 0.2)';
-          }}
-          onMouseLeave={(e) => {
-            (e.currentTarget as HTMLElement).style.borderLeftColor = 'var(--ow-accent)';
-            (e.currentTarget as HTMLElement).style.boxShadow = 'none';
+            padding: '10px 0',
+            borderBottom: '1px solid rgba(100, 170, 240, 0.12)',
           }}
         >
-          {/* Tags */}
-          <div className="flex gap-2 mb-2">
+          {/* Title */}
+          <h2
+            style={{
+              fontSize: 'min(5vh, 42px)',
+              fontWeight: 'bold',
+              fontStyle: 'italic',
+              color: 'white',
+              textShadow: '0 0 2px black',
+              lineHeight: 1.2,
+              fontFamily: "'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif",
+            }}
+          >
+            {post.title}
+          </h2>
+
+          {/* Meta: date + tags */}
+          <div className="flex items-center gap-3 mt-1">
+            <span
+              style={{
+                fontSize: '12px',
+                color: 'rgba(255,255,255,0.5)',
+                fontFamily: "'PingFang SC', 'Microsoft YaHei', sans-serif",
+              }}
+            >
+              {formattedDate}
+            </span>
             {post.tags.map((tag) => (
               <span
                 key={tag}
-                className="text-xs px-2 py-0.5 rounded-sm ow-title tracking-wider uppercase"
                 style={{
-                  background: 'rgba(65, 166, 246, 0.15)',
-                  color: 'var(--ow-accent)',
-                  border: '1px solid rgba(65, 166, 246, 0.3)',
+                  fontSize: '11px',
+                  color: 'rgba(90, 200, 255, 0.75)',
+                  fontFamily: "'PingFang SC', 'Microsoft YaHei', sans-serif",
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.05em',
                 }}
               >
                 {tag}
               </span>
             ))}
-          </div>
-
-          {/* Title */}
-          <h2
-            className="ow-title text-xl font-bold mb-2 group-hover:text-[color:var(--ow-accent)] transition-colors"
-            style={{ color: 'var(--ow-text)' }}
-          >
-            {post.title}
-          </h2>
-
-          {/* Excerpt */}
-          <p className="text-sm mb-3" style={{ color: 'var(--ow-text-muted)', lineHeight: '1.6' }}>
-            {post.excerpt}
-          </p>
-
-          {/* Footer */}
-          <div className="flex items-center justify-between">
-            <span className="text-xs" style={{ color: 'var(--ow-text-muted)' }}>
-              {formattedDate}
-            </span>
-            <motion.span
-              className="text-xs ow-title tracking-wider uppercase"
-              style={{ color: 'var(--ow-accent)' }}
-              whileHover={{ x: 4, transition: { type: 'spring', stiffness: 400 } }}
-            >
-              阅读全文 →
-            </motion.span>
           </div>
         </div>
       </Link>
