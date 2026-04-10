@@ -91,7 +91,7 @@ export default function Home() {
           </motion.div>
 
           {/* Primary menu */}
-          <ul style={{ padding: 0, margin: 0, marginBottom: '12px' }}>
+          <ul style={{ padding: 0, margin: 0, marginBottom: '16px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
             {primaryMenuItems.map((item, i) => (
               <MenuItem
                 key={item.route}
@@ -136,28 +136,64 @@ export default function Home() {
             按下回车开始聊天
           </motion.p>
 
-          {/* Bottom-right: wallpaper switcher */}
-          <motion.button
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.9, type: 'spring', stiffness: 300 }}
-            whileHover={{ scale: 1.05, transition: { type: 'spring', stiffness: 400 } }}
-            whileTap={{ scale: 0.95 }}
-            onClick={switchWallpaper}
-            style={{
-              padding: '6px 14px',
-              background: 'rgba(249,158,26,0.85)',
-              color: '#1a1e2e',
-              fontSize: '12px',
-              fontWeight: 'bold',
-              border: 'none',
-              cursor: 'pointer',
-              fontFamily: "'PingFang SC', 'Microsoft YaHei', sans-serif",
-              clipPath: 'polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px))',
-            }}
-          >
-            切换壁纸
-          </motion.button>
+          {/* Bottom-right: activity banner + wallpaper switcher */}
+          <div className="flex flex-col items-end gap-3">
+            {/* Activity announcement banner */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.0, type: 'spring', stiffness: 260, damping: 22 }}
+              style={{
+                background: 'rgba(15, 20, 40, 0.75)',
+                border: '1px solid rgba(249, 158, 26, 0.6)',
+                borderLeft: '3px solid #f99e1a',
+                padding: '8px 12px',
+                maxWidth: '220px',
+                backdropFilter: 'blur(8px)',
+                WebkitBackdropFilter: 'blur(8px)',
+              }}
+            >
+              <p style={{
+                fontSize: '11px',
+                color: '#f99e1a',
+                fontWeight: 'bold',
+                fontFamily: "'PingFang SC', 'Microsoft YaHei', sans-serif",
+                marginBottom: '2px',
+              }}>
+                ★ 最新活动
+              </p>
+              <p style={{
+                fontSize: '11px',
+                color: 'rgba(255,255,255,0.85)',
+                fontFamily: "'PingFang SC', 'Microsoft YaHei', sans-serif",
+              }}>
+                欢迎来到守望先锋风格博客
+              </p>
+            </motion.div>
+
+            {/* Wallpaper switcher */}
+            <motion.button
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.9, type: 'spring', stiffness: 300 }}
+              whileHover={{ scale: 1.05, transition: { type: 'spring', stiffness: 400 } }}
+              whileTap={{ scale: 0.95 }}
+              onClick={switchWallpaper}
+              style={{
+                padding: '6px 14px',
+                background: 'rgba(249,158,26,0.85)',
+                color: '#1a1e2e',
+                fontSize: '12px',
+                fontWeight: 'bold',
+                border: 'none',
+                cursor: 'pointer',
+                fontFamily: "'PingFang SC', 'Microsoft YaHei', sans-serif",
+                clipPath: 'polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px))',
+              }}
+            >
+              切换壁纸
+            </motion.button>
+          </div>
         </div>
       </div>
     </>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
@@ -14,8 +14,23 @@ const TAB_LINKS = [
 export default function NavBar() {
   const [status, setStatus] = useState<UserStatus>(UserStatus.Online);
   const [showStatusMenu, setShowStatusMenu] = useState(false);
+  const [currentTime, setCurrentTime] = useState('');
   const pathname = usePathname();
   const isHome = pathname === '/';
+
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      const h = now.getHours();
+      const m = now.getMinutes().toString().padStart(2, '0');
+      const ampm = h >= 12 ? 'PM' : 'AM';
+      const h12 = h % 12 || 12;
+      setCurrentTime(`${h12}:${m} ${ampm}`);
+    };
+    updateTime();
+    const timer = setInterval(updateTime, 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   const cycleStatus = () => {
     const order = [UserStatus.Online, UserStatus.Away, UserStatus.Busy, UserStatus.Offline];
@@ -100,8 +115,25 @@ export default function NavBar() {
           </nav>
         )}
 
-        {/* Right: social + user info */}
+        {/* Right: time + social + user info */}
         <div className="flex items-center gap-2">
+          {/* Clock — OW-style top-right time display */}
+          {currentTime && (
+            <div
+              style={{
+                padding: '2px 6px 4px',
+                background: 'rgba(25, 28, 45, 0.5)',
+                color: '#b0d5e0',
+                fontSize: '14px',
+                lineHeight: 1,
+                fontFamily: "'PingFang SC', 'Microsoft YaHei', sans-serif",
+                flexShrink: 0,
+              }}
+            >
+              {currentTime}
+            </div>
+          )}
+
           {/* GitHub */}
           <motion.a
             href="https://github.com"
@@ -113,6 +145,7 @@ export default function NavBar() {
               background: '#2993e1',
               textDecoration: 'none',
               flexShrink: 0,
+              boxShadow: '0 0 4px 1px rgba(41, 148, 224, 0.5)',
             }}
             whileHover={{ scale: 1.08, transition: { type: 'spring', stiffness: 400 } }}
             whileTap={{ scale: 0.95 }}
