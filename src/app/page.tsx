@@ -18,15 +18,9 @@ const secondaryMenuItems = [
   { label: '更新说明', route: '#' },
 ];
 
-const WALLPAPERS = [
-  'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1920&q=80',
-  'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1920&q=80',
-  'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1920&q=80',
-];
-
 export default function Home() {
   const [sceneLevel, setSceneLevel] = useState<SceneLevel>(SceneLevel.Zero);
-  const [wallpaperIndex, setWallpaperIndex] = useState(0);
+  const [gradientIndex, setGradientIndex] = useState(0);
   const router = useRouter();
 
   const handleNavigate = (route: string) => {
@@ -40,12 +34,12 @@ export default function Home() {
   };
 
   const switchWallpaper = () => {
-    setWallpaperIndex((i) => (i + 1) % WALLPAPERS.length);
+    setGradientIndex((i) => i + 1);
   };
 
   return (
     <>
-      <Scene level={sceneLevel} imageUrl={WALLPAPERS[wallpaperIndex]} isHome />
+      <Scene level={sceneLevel} gradientIndex={gradientIndex} isHome />
 
       {/* Main layout — full viewport */}
       <div className="fixed inset-0 flex flex-col pointer-events-none">

@@ -24,7 +24,7 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
     <>
       <Scene level={SceneLevel.Fill} />
       <div
-        className="relative min-h-screen overflow-y-auto px-6 md:px-8 lg:px-12 py-8 max-w-3xl mx-auto"
+        className="relative min-h-screen overflow-y-auto px-8 md:px-16 lg:px-24 py-8"
         style={{ paddingTop: 'calc(var(--navbar-height) + 2rem)' }}
       >
         {/* Back button */}
@@ -90,10 +90,11 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
 
         {/* Article content */}
         <motion.article
-          className="ow-panel rounded-sm p-6 md:p-8"
+          className="ow-panel px-6 md:px-8 py-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ type: 'spring', stiffness: 250, damping: 22, delay: 0.2 }}
+          style={{ maxWidth: '800px' }}
         >
           <div
             className="prose prose-invert max-w-none"

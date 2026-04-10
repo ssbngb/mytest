@@ -56,12 +56,12 @@ body {
   -webkit-user-select: none;
 }
 
-/* OW Panel style */
+/* OW Panel style — semi-transparent blue, consistent across all pages */
 .ow-panel {
-  background: var(--ow-bg-panel);
-  border: 1px solid var(--ow-border);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(15, 25, 45, 0.75);
+  border: 1px solid rgba(100, 170, 240, 0.15);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
 /* OW Title style */

@@ -26,7 +26,7 @@ export default function AboutPage() {
     <>
       <Scene level={SceneLevel.One} />
       <div
-        className="relative min-h-screen overflow-y-auto px-6 md:px-8 lg:px-12 py-8 max-w-4xl mx-auto"
+        className="relative min-h-screen overflow-y-auto px-8 md:px-16 lg:px-24 py-8"
         style={{ paddingTop: 'calc(var(--navbar-height) + 2rem)' }}
       >
         {/* Header */}

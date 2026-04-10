@@ -9,22 +9,6 @@ interface BlogCardProps {
   index: number;
 }
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 30, scale: 0.96 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      delay: i * 0.08,
-      type: 'spring',
-      stiffness: 250,
-      damping: 22,
-      mass: 0.9,
-    },
-  }),
-};
-
 export default function BlogCard({ post, index }: BlogCardProps) {
   const formattedDate = new Date(post.date).toLocaleDateString('zh-CN', {
     year: 'numeric',
@@ -33,78 +17,43 @@ export default function BlogCard({ post, index }: BlogCardProps) {
   });
 
   return (
-    <motion.div
-      custom={index}
-      variants={cardVariants}
-      initial="hidden"
-      animate="visible"
-      whileHover={{
-        y: -4,
-        scale: 1.02,
-        transition: { type: 'spring', stiffness: 400, damping: 20 },
+    <motion.li
+      initial={{ opacity: 0, x: -30 }}
+      animate={{
+        opacity: 1,
+        x: 0,
+        transition: { delay: 0.15 + index * 0.06, type: 'spring', stiffness: 300, damping: 22 },
       }}
+      whileHover={{ x: 30, scale: 1.02, transition: { type: 'spring', stiffness: 400, damping: 20 } }}
+      whileTap={{ scale: 0.98 }}
+      className="list-none cursor-pointer"
+      style={{ marginBottom: '16px' }}
     >
-      <Link href={`/blog/${post.slug}`} className="block">
-        <div
-          className="ow-panel rounded-sm p-5 group"
+      <Link href={`/blog/${post.slug}`} style={{ textDecoration: 'none' }}>
+        <h2
           style={{
-            borderLeft: '3px solid var(--ow-accent)',
-            transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
-          }}
-          onMouseEnter={(e) => {
-            (e.currentTarget as HTMLElement).style.borderLeftColor = 'var(--ow-primary)';
-            (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 32px rgba(65, 166, 246, 0.2)';
-          }}
-          onMouseLeave={(e) => {
-            (e.currentTarget as HTMLElement).style.borderLeftColor = 'var(--ow-accent)';
-            (e.currentTarget as HTMLElement).style.boxShadow = 'none';
+            fontSize: 'min(4vh, 36px)',
+            fontWeight: 'bold',
+            color: 'white',
+            textShadow: '0 0 2px black',
+            lineHeight: 1.3,
+            fontFamily: "'PingFang SC', 'Microsoft YaHei', sans-serif",
           }}
         >
-          {/* Tags */}
-          <div className="flex gap-2 mb-2">
-            {post.tags.map((tag) => (
-              <span
-                key={tag}
-                className="text-xs px-2 py-0.5 rounded-sm ow-title tracking-wider uppercase"
-                style={{
-                  background: 'rgba(65, 166, 246, 0.15)',
-                  color: 'var(--ow-accent)',
-                  border: '1px solid rgba(65, 166, 246, 0.3)',
-                }}
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-
-          {/* Title */}
-          <h2
-            className="ow-title text-xl font-bold mb-2 group-hover:text-[color:var(--ow-accent)] transition-colors"
-            style={{ color: 'var(--ow-text)' }}
-          >
-            {post.title}
-          </h2>
-
-          {/* Excerpt */}
-          <p className="text-sm mb-3" style={{ color: 'var(--ow-text-muted)', lineHeight: '1.6' }}>
-            {post.excerpt}
-          </p>
-
-          {/* Footer */}
-          <div className="flex items-center justify-between">
-            <span className="text-xs" style={{ color: 'var(--ow-text-muted)' }}>
-              {formattedDate}
-            </span>
-            <motion.span
-              className="text-xs ow-title tracking-wider uppercase"
-              style={{ color: 'var(--ow-accent)' }}
-              whileHover={{ x: 4, transition: { type: 'spring', stiffness: 400 } }}
-            >
-              阅读全文 →
-            </motion.span>
-          </div>
-        </div>
+          {post.title}
+        </h2>
+        <p
+          style={{
+            fontSize: '13px',
+            color: 'rgba(255,255,255,0.45)',
+            textShadow: '0 0 2px black',
+            marginTop: '2px',
+            fontFamily: "'PingFang SC', 'Microsoft YaHei', sans-serif",
+          }}
+        >
+          {formattedDate}<span aria-hidden="true">{' · '}</span>{post.tags.join(' · ')}
+        </p>
       </Link>
-    </motion.div>
+    </motion.li>
   );
 }
